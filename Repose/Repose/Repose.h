@@ -42,11 +42,11 @@ typedef enum {
 - (void)sendRequestWithMethod:(NSString*)method 
                          path:(NSString *)path 
                    parameters:(NSDictionary *)params 
-                    withBlock:(void (^)(NSInteger code, id responseObject))block;
+                    withBlock:(void (^)(ReposeResponseCode code, id responseObject))block;
 
-- (void)get:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(NSInteger code, id responseObject))block;
-- (void)post:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(NSInteger code, id responseObject))block;
-- (void)put:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(NSInteger code, id responseObject))block;
-- (void)delete:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(NSInteger code, id responseObject))block;
+- (void)get:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block;
+- (void)post:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block;
+- (void)put:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block;
+- (void)delete:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block;
 
 @end

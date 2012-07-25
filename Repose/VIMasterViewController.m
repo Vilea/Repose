@@ -7,23 +7,29 @@
 //
 
 #import "VIMasterViewController.h"
-
-#import "VIDetailViewController.h"
+#import "Repose.h"
+#import "VIBubbleCell.h"
+#import "TwitterUser.h"
 
 @interface VIMasterViewController () {
     NSMutableArray *_objects;
 }
+
+@property (strong, nonatomic) Repose *server;
+
 @end
 
 @implementation VIMasterViewController
 
 @synthesize detailViewController = _detailViewController;
+@synthesize server = _server;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Master", @"Master");
+        self.server = [[Repose alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.twitter.com/1"]];
     }
     return self;
 }
@@ -32,10 +38,28 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // https:/api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=bontoJR&count=2
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"false", @"include_entities", @"true", @"include_rts", @"bontoJR", @"screen_name", @"20", @"count", nil];
+    [self.server get:@"statuses/user_timeline.json" parameters:params withBlock:^(ReposeResponseCode code, id responseObject){
+        NSLog(@"responseObject -> %@", responseObject);
+        _objects = responseObject;
+        
+        [self.tableView reloadData];
+    }];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *object = [_objects objectAtIndex:indexPath.row];
+    return [VIBubbleCell heightForRowWithMessage:[object objectForKey:@"text"]];
 }
 
 - (void)viewDidUnload
@@ -47,16 +71,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
-
-- (void)insertNewObject:(id)sender
-{
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
-    }
-    [_objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - Table View
@@ -76,15 +90,16 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    VIBubbleCell *cell = (VIBubbleCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell = [[VIBubbleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 
 
-    NSDate *object = [_objects objectAtIndex:indexPath.row];
-    cell.textLabel.text = [object description];
+    NSDictionary *object = [_objects objectAtIndex:indexPath.row];
+    [cell setMessage:[object objectForKey:@"text"]];
+    [cell setBubbleColor:0 alignment:(indexPath.row % 2)];
+    
     return cell;
 }
 
@@ -122,12 +137,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!self.detailViewController) {
-        self.detailViewController = [[VIDetailViewController alloc] initWithNibName:@"VIDetailViewController" bundle:nil];
-    }
-    NSDate *object = [_objects objectAtIndex:indexPath.row];
-    self.detailViewController.detailItem = object;
-    [self.navigationController pushViewController:self.detailViewController animated:YES];
+
 }
 
 @end
