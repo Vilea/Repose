@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    VIBubbleLeft,
+    VIBubbleRight
+} VIBubblePosition;
+
 @interface VIBubbleCell : UITableViewCell
 @property (nonatomic, strong) NSString *message;
 
 + (CGFloat)heightForRowWithMessage:(NSString *)message;
-- (void)setBubbleColor:(NSInteger)colorIndex alignment:(NSInteger)alignment;
+- (void)setBubbleColor:(UIColor *)color position:(VIBubblePosition)position;
 
 @end

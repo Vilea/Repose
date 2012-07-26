@@ -7,6 +7,7 @@
 //
 
 #import "VIBubbleCell.h"
+#import "UIImage+Extras.h"
 
 @interface VIBubbleCell ()
 
@@ -50,7 +51,7 @@
     CGSize size = [message sizeWithFont:[UIFont systemFontOfSize:14.0] 
                       constrainedToSize:CGSizeMake(240.0, 480.0) 
                           lineBreakMode:UILineBreakModeWordWrap];
-	return size.height + 15;
+	return size.height + 20;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -69,26 +70,25 @@
     }
 }
 
-- (void)setBubbleColor:(NSInteger)colorIndex alignment:(NSInteger)alignment
+- (void)setBubbleColor:(UIColor *)color position:(VIBubblePosition)position
 {
     CGSize size = [_message sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(240.0f, 480.0f) lineBreakMode:UILineBreakModeWordWrap];
     
-    UIImage *balloon;
+    UIImage *bubble = [UIImage imageNamed:@"bubble.png"];
     
-    if(alignment == 0)
+    if(position == VIBubbleRight)
     {
         self.bubbleView.frame = CGRectMake(320.0f - (size.width + 28.0f), 2.0f, size.width + 28.0f, size.height + 15.0f);
-        balloon = [[UIImage imageNamed:@"green.png"] stretchableImageWithLeftCapWidth:24 topCapHeight:15];
+        bubble = [bubble getImageWithTintedColor:color];
+        bubble = [[UIImage imageWithCGImage:bubble.CGImage scale:1.0 orientation: UIImageOrientationUpMirrored] stretchableImageWithLeftCapWidth:22 topCapHeight:14];
         label.frame = CGRectMake(307.0f - (size.width + 5.0f), 8.0f, size.width + 5.0f, size.height);
-    }
-    else
-    {
+    } else {
         self.bubbleView.frame = CGRectMake(0.0, 2.0, size.width + 28, size.height + 15);
-        balloon = [[UIImage imageNamed:@"grey.png"] stretchableImageWithLeftCapWidth:24 topCapHeight:15];
+        bubble = [[bubble getImageWithTintedColor:color] stretchableImageWithLeftCapWidth:22 topCapHeight:14];
         label.frame = CGRectMake(16, 8, size.width + 5, size.height);
     }
     
-    self.bubbleView.image = balloon;
+    self.bubbleView.image = bubble;
 }
 
 @end

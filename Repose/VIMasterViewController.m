@@ -47,7 +47,7 @@
     [super viewDidAppear:animated];
     
     // https:/api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=bontoJR&count=2
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"false", @"include_entities", @"true", @"include_rts", @"bontoJR", @"screen_name", @"20", @"count", nil];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"false", @"include_entities", @"true", @"include_rts", @"bontoJR", @"screen_name", @"100", @"count", nil];
     [self.server get:@"statuses/user_timeline.json" parameters:params withBlock:^(ReposeResponseCode code, id responseObject){
         NSLog(@"responseObject -> %@", responseObject);
         _objects = responseObject;
@@ -89,16 +89,22 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+    static UIColor *color1, *color2;
+    
+    if (!color1 || color2) {
+        color1 = [UIColor colorWithHue:0.576 saturation:0.933 brightness:0.988 alpha:1.000];
+        color2 = [UIColor colorWithHue:0.276 saturation:0.933 brightness:0.988 alpha:1.000];
+    }
     
     VIBubbleCell *cell = (VIBubbleCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[VIBubbleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 
-
     NSDictionary *object = [_objects objectAtIndex:indexPath.row];
+    
     [cell setMessage:[object objectForKey:@"text"]];
-    [cell setBubbleColor:0 alignment:(indexPath.row % 2)];
+    [cell setBubbleColor:(indexPath.row%2)?color1:color2 position:(indexPath.row%2)];
     
     return cell;
 }

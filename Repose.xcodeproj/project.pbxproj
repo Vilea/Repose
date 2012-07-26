@@ -29,8 +29,9 @@
 		CB80280315BFD088006DCB52 /* NSObject+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = CB80280215BFD088006DCB52 /* NSObject+JSON.m */; };
 		CB80280815BFEC83006DCB52 /* TwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CB80280615BFEC83006DCB52 /* TwitterUser.m */; };
 		CB92C76F15C011FE00781189 /* VIBubbleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB92C76E15C011FE00781189 /* VIBubbleCell.m */; };
-		CB92C77315C0123700781189 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = CB92C77115C0123700781189 /* green.png */; };
-		CB92C77415C0123700781189 /* grey.png in Resources */ = {isa = PBXBuildFile; fileRef = CB92C77215C0123700781189 /* grey.png */; };
+		CBB22AA215C14872007327BE /* UIImage+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB22AA115C14872007327BE /* UIImage+Extras.m */; };
+		CBB22AA615C16FF6007327BE /* bubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB22AA415C16FF6007327BE /* bubble@2x.png */; };
+		CBB22AA715C16FF6007327BE /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB22AA515C16FF6007327BE /* bubble.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,8 +77,10 @@
 		CB80280715BFEC83006DCB52 /* TwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterUser.h; sourceTree = "<group>"; };
 		CB92C76D15C011FE00781189 /* VIBubbleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIBubbleCell.h; sourceTree = "<group>"; };
 		CB92C76E15C011FE00781189 /* VIBubbleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIBubbleCell.m; sourceTree = "<group>"; };
-		CB92C77115C0123700781189 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
-		CB92C77215C0123700781189 /* grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey.png; sourceTree = "<group>"; };
+		CBB22AA015C14872007327BE /* UIImage+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extras.h"; sourceTree = "<group>"; };
+		CBB22AA115C14872007327BE /* UIImage+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extras.m"; sourceTree = "<group>"; };
+		CBB22AA415C16FF6007327BE /* bubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble@2x.png"; sourceTree = "<group>"; };
+		CBB22AA515C16FF6007327BE /* bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +222,8 @@
 			children = (
 				CB92C76D15C011FE00781189 /* VIBubbleCell.h */,
 				CB92C76E15C011FE00781189 /* VIBubbleCell.m */,
+				CBB22AA015C14872007327BE /* UIImage+Extras.h */,
+				CBB22AA115C14872007327BE /* UIImage+Extras.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -226,8 +231,8 @@
 		CB92C77015C0123700781189 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				CB92C77115C0123700781189 /* green.png */,
-				CB92C77215C0123700781189 /* grey.png */,
+				CBB22AA415C16FF6007327BE /* bubble@2x.png */,
+				CBB22AA515C16FF6007327BE /* bubble.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -285,8 +290,8 @@
 			files = (
 				CB221F5115BE9CEE0094A12C /* InfoPlist.strings in Resources */,
 				CB221F6015BE9CEE0094A12C /* VIMasterViewController.xib in Resources */,
-				CB92C77315C0123700781189 /* green.png in Resources */,
-				CB92C77415C0123700781189 /* grey.png in Resources */,
+				CBB22AA615C16FF6007327BE /* bubble@2x.png in Resources */,
+				CBB22AA715C16FF6007327BE /* bubble.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +319,7 @@
 				CB80280315BFD088006DCB52 /* NSObject+JSON.m in Sources */,
 				CB80280815BFEC83006DCB52 /* TwitterUser.m in Sources */,
 				CB92C76F15C011FE00781189 /* VIBubbleCell.m in Sources */,
+				CBB22AA215C14872007327BE /* UIImage+Extras.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
