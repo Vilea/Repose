@@ -71,7 +71,7 @@ In Repose, to help readability and coding, we mapped the most commons http statu
 	    ReposeResponseCodeRequestFailed = 0
 	} ReposeResponseCode;
 
-Please note that non all defined [status codes by W3](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) have been implemented.
+Please note that not all defined [status codes by W3](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) have been implemented.
 
 #LICENSE
 Copyright (c) 2012 Vilea GmbH
