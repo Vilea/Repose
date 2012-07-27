@@ -22,10 +22,10 @@ Import the file in your class with `#import "Repose.h"` where needed.
 Init the class with `initWithBaseURL:`. The base URL will be used to create the correct URL for calls, for example Twitter's URL is `https://api.twitter.com/1`.
 Once the object has been initiliazied, simply use the methods:
 
-		- (void)get:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block
-		- (void)post:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block
-		- (void)put:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block
-		- (void)delete:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block
+	- (void)get:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block
+	- (void)post:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block
+	- (void)put:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block
+	- (void)delete:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block
 
 To send requests.
 Hanlde the response with a block.
@@ -33,29 +33,29 @@ Hanlde the response with a block.
 ### ReposeResponseCode
 In repose, to help readability and coding, we mapped the most commons code in this way:
 
-		typedef enum {
-		    ReposeResponseCodeOK = 200,
-		    ReposeResponseCodeCreated = 201,
-		    ReposeResponseCodeAccepted = 202,
-		    
-		    ReposeResponseCodeMovedPermanently = 301,
-		    ReposeResponseCodeTemporaryRedirect = 307,
-		    
-		    ReposeResponseCodeBadRequest = 400,
-		    ReposeResponseCodeUnauthorized = 401,
-		    ReposeResponseCodeForbidden = 403,
-		    ReposeResponseCodeNotFound = 404,
-		    ReposeResponseCodeMethodNotAllowed = 405,
-		    ReposeResponseCodeNotAcceptable = 406,
-		    ReposeResponseCodeRequestTimeout = 408,
-		    
-		    ReposeResponseCodeInternalServerError = 500,
-		    ReposeResponseCodeBadGateway = 502,
-		    ReposeResponseCodeServiceUnavailable = 503,
-		    ReposeResponseCodeGatewayTimeout = 504,
-		    ReposeResponseCodeHTTPVersionNotSupported = 505,
-		    
-		    ReposeResponseCodeRequestFailed = 0
-		} ReposeResponseCode;
+	typedef enum {
+	    ReposeResponseCodeOK = 200,
+	    ReposeResponseCodeCreated = 201,
+	    ReposeResponseCodeAccepted = 202,
+	    
+	    ReposeResponseCodeMovedPermanently = 301,
+	    ReposeResponseCodeTemporaryRedirect = 307,
+	    
+	    ReposeResponseCodeBadRequest = 400,
+	    ReposeResponseCodeUnauthorized = 401,
+	    ReposeResponseCodeForbidden = 403,
+	    ReposeResponseCodeNotFound = 404,
+	    ReposeResponseCodeMethodNotAllowed = 405,
+	    ReposeResponseCodeNotAcceptable = 406,
+	    ReposeResponseCodeRequestTimeout = 408,
+	    
+	    ReposeResponseCodeInternalServerError = 500,
+	    ReposeResponseCodeBadGateway = 502,
+	    ReposeResponseCodeServiceUnavailable = 503,
+	    ReposeResponseCodeGatewayTimeout = 504,
+	    ReposeResponseCodeHTTPVersionNotSupported = 505,
+	    
+	    ReposeResponseCodeRequestFailed = 0
+	} ReposeResponseCode;
 
 Please note that non all defined [status codes by W3](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) have been implemented.
