@@ -7,8 +7,8 @@ The aim of this library is to provide a smart and light extesion of AFNetworking
 Repose is still in early development stage.
 
 ## Roadmap
-- Basic calls (GET, POST, PUT, DELETE)
-- Basic object conversion/mapping
+- Basic calls (GET, POST, PUT, DELETE) ✓
+- Basic object conversion/mapping ✓
 - Basic authentication
 - Support of XML and JSON calls/responses
 - Smart object conversion
@@ -20,7 +20,7 @@ Repose is still in early development stage.
 Import [AFNetworking](https://github.com/AFNetworking/AFNetworking) and then the files in 'Repose' folder inside your project.<br/>
 Import the file in your class with `#import "Repose.h"` where needed.<br/>
 Init the class with `initWithBaseURL:`. The base URL will be used to create the correct URL for calls, for example Twitter's URL is `https://api.twitter.com/1`.<br/>
-Once the object has been initiliazied, simply use the followint methods to send requests:
+Once the object has been initiliazied, simply use the following methods to send requests:
 
 	- (void)get:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block
 	- (void)post:(NSString *)path parameters:(NSDictionary *)params withBlock:(void (^)(ReposeResponseCode code, id responseObject))block
@@ -32,7 +32,7 @@ Handle the response with a block.
 ### Example
 
 	// Base URL: https://api.twitter.com/1
-	// Call URL: https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=bontoJR&count=2
+	// Complete Call URL: https://api.twitter.com/1/statuses/user_timeline.json?include_entities=false&include_rts=true&screen_name=VileaGmbH&count=100
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"false", @"include_entities", @"true", @"include_rts", @"VileaGmbH", @"screen_name", @"100", @"count", nil];
     [self.server get:@"statuses/user_timeline.json" parameters:params withBlock:^(ReposeResponseCode code, id responseObject){
         NSLog(@"responseObject -> %@", responseObject);
