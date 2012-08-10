@@ -7,29 +7,31 @@
 //
 
 #import "VIMasterViewController.h"
-#import "Repose.h"
-#import "VIBubbleCell.h"
-#import "TwitterUser.h"
+#import "VIBasicTwitterViewController.h"
+#import "VITwitterOAuthController.h"
 
 @interface VIMasterViewController () {
-    NSMutableArray *_objects;
+    NSArray *_objects;
 }
-
-@property (strong, nonatomic) Repose *server;
 
 @end
 
 @implementation VIMasterViewController
 
-@synthesize detailViewController = _detailViewController;
-@synthesize server = _server;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.title = NSLocalizedString(@"Master", @"Master");
+        _objects = @[@"VIBasicTwitterViewController", @"VITwitterOAuthController"];
+    }
+    return self;
+}- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Master", @"Master");
-        self.server = [[Repose alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.twitter.com/1"]];
+        
     }
     return self;
 }
@@ -40,26 +42,6 @@
 	// Do any additional setup after loading the view, typically from a nib.
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    // https:/api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=bontoJR&count=2
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"false", @"include_entities", @"true", @"include_rts", @"VileaGmbH", @"screen_name", @"100", @"count", nil];
-    [self.server get:@"statuses/user_timeline.json" parameters:params withBlock:^(ReposeResponseCode code, id responseObject){
-        NSLog(@"responseObject -> %@", responseObject);
-        _objects = responseObject;
-        
-        [self.tableView reloadData];
-    }];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSDictionary *object = [_objects objectAtIndex:indexPath.row];
-    return [VIBubbleCell heightForRowWithMessage:[object objectForKey:@"text"]];
 }
 
 - (void)viewDidUnload
@@ -89,22 +71,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    static UIColor *color1, *color2;
-    
-    if (!color1 || color2) {
-        color1 = [UIColor colorWithHue:0.576 saturation:0.933 brightness:0.988 alpha:1.000];
-        color2 = [UIColor colorWithHue:0.276 saturation:0.933 brightness:0.988 alpha:1.000];
-    }
-    
-    VIBubbleCell *cell = (VIBubbleCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[VIBubbleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 
-    NSDictionary *object = [_objects objectAtIndex:indexPath.row];
+    NSString *object = [_objects objectAtIndex:indexPath.row];
     
-    [cell setMessage:[object objectForKey:@"text"]];
-    [cell setBubbleColor:(indexPath.row%2)?color1:color2 position:(indexPath.row%2)];
+    cell.textLabel.text = object;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
@@ -113,16 +89,6 @@
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
 }
 
 /*
@@ -143,7 +109,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    id viewController = [[NSClassFromString([_objects objectAtIndex:indexPath.row]) alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 @end

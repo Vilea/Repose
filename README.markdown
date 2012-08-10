@@ -74,7 +74,7 @@ In Repose, to help readability and coding, we mapped the most commons http statu
 Please note that not all defined [status codes by W3](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) have been implemented.
 
 ## Bubble Cell
-The example comes with a class called `VIBubbleCell` that basically reproduces the bubble of the SMS app. Feel free to use whit class (and eventually extends it) in any project.
+The example comes with a class called `VIBubbleCell` that reproduces the bubble of the SMS app. Feel free to use this class (and eventually extends it) in any project.
 
 #LICENSE
 Copyright (c) 2012 Vilea GmbH

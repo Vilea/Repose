@@ -8,8 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@class VIDetailViewController;
-
-@interface VIMasterViewController : UITableViewController
-
+@interface VIBasicTwitterViewController : UITableViewController
 @end

@@ -1,5 +1,5 @@
 //
-//  MyClass.m
+//  TwitterUser.m
 //  
 //
 //  Created by Junior B. on 7/25/12.

@@ -1,5 +1,5 @@
 //
-//  MyClass.h
+//  TwitterUser.h
 //  
 //
 //  Created by Junior B. on 7/25/12.
