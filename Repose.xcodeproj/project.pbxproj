@@ -28,8 +28,9 @@
 		CB80280315BFD088006DCB52 /* NSObject+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = CB80280215BFD088006DCB52 /* NSObject+JSON.m */; };
 		CBB22AA615C16FF6007327BE /* bubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB22AA415C16FF6007327BE /* bubble@2x.png */; };
 		CBB22AA715C16FF6007327BE /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB22AA515C16FF6007327BE /* bubble.png */; };
+		CBD233B115DA46C300FDCB24 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD233B015DA46C300FDCB24 /* QuartzCore.framework */; };
 		CBE34D8D15D53958007596CB /* AFOAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE34D8A15D53958007596CB /* AFOAuth2Client.m */; };
-		CBE34D9615D540C1007596CB /* VITwitterOAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE34D9515D540C1007596CB /* VITwitterOAuthController.m */; };
+		CBE34D9615D540C1007596CB /* VIFoursquareOAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE34D9515D540C1007596CB /* VIFoursquareOAuthController.m */; };
 		CBE34D9915D540D1007596CB /* VIBasicTwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE34D9815D540D1007596CB /* VIBasicTwitterViewController.m */; };
 		CBE34D9E15D54124007596CB /* UIImage+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE34D9B15D54124007596CB /* UIImage+Extras.m */; };
 		CBE34D9F15D54124007596CB /* VIBubbleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE34D9D15D54124007596CB /* VIBubbleCell.m */; };
@@ -76,10 +77,11 @@
 		CB80280215BFD088006DCB52 /* NSObject+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JSON.m"; sourceTree = "<group>"; };
 		CBB22AA415C16FF6007327BE /* bubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble@2x.png"; sourceTree = "<group>"; };
 		CBB22AA515C16FF6007327BE /* bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble.png; sourceTree = "<group>"; };
+		CBD233B015DA46C300FDCB24 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CBE34D8915D53958007596CB /* AFOAuth2Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFOAuth2Client.h; sourceTree = "<group>"; };
 		CBE34D8A15D53958007596CB /* AFOAuth2Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFOAuth2Client.m; sourceTree = "<group>"; };
-		CBE34D9415D540C1007596CB /* VITwitterOAuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VITwitterOAuthController.h; path = Examples/VITwitterOAuthController.h; sourceTree = "<group>"; };
-		CBE34D9515D540C1007596CB /* VITwitterOAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VITwitterOAuthController.m; path = Examples/VITwitterOAuthController.m; sourceTree = "<group>"; };
+		CBE34D9415D540C1007596CB /* VIFoursquareOAuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIFoursquareOAuthController.h; path = Examples/VIFoursquareOAuthController.h; sourceTree = "<group>"; };
+		CBE34D9515D540C1007596CB /* VIFoursquareOAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIFoursquareOAuthController.m; path = Examples/VIFoursquareOAuthController.m; sourceTree = "<group>"; };
 		CBE34D9715D540D1007596CB /* VIBasicTwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIBasicTwitterViewController.h; path = Examples/VIBasicTwitterViewController.h; sourceTree = "<group>"; };
 		CBE34D9815D540D1007596CB /* VIBasicTwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIBasicTwitterViewController.m; path = Examples/VIBasicTwitterViewController.m; sourceTree = "<group>"; };
 		CBE34D9A15D54123007596CB /* UIImage+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Extras.h"; path = "Utils/UIImage+Extras.h"; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBD233B115DA46C300FDCB24 /* QuartzCore.framework in Frameworks */,
 				CB221F4715BE9CEE0094A12C /* UIKit.framework in Frameworks */,
 				CB221F4915BE9CEE0094A12C /* Foundation.framework in Frameworks */,
 				CB221F4B15BE9CEE0094A12C /* CoreGraphics.framework in Frameworks */,
@@ -124,6 +127,7 @@
 		CB221F4515BE9CEE0094A12C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CBD233B015DA46C300FDCB24 /* QuartzCore.framework */,
 				CB221F4615BE9CEE0094A12C /* UIKit.framework */,
 				CB221F4815BE9CEE0094A12C /* Foundation.framework */,
 				CB221F4A15BE9CEE0094A12C /* CoreGraphics.framework */,
@@ -257,8 +261,8 @@
 		CBE34D9315D54049007596CB /* Examples */ = {
 			isa = PBXGroup;
 			children = (
-				CBE34D9415D540C1007596CB /* VITwitterOAuthController.h */,
-				CBE34D9515D540C1007596CB /* VITwitterOAuthController.m */,
+				CBE34D9415D540C1007596CB /* VIFoursquareOAuthController.h */,
+				CBE34D9515D540C1007596CB /* VIFoursquareOAuthController.m */,
 				CBE34D9715D540D1007596CB /* VIBasicTwitterViewController.h */,
 				CBE34D9815D540D1007596CB /* VIBasicTwitterViewController.m */,
 			);
@@ -345,7 +349,7 @@
 				CB221F8C15BECD7B0094A12C /* UIImageView+AFNetworking.m in Sources */,
 				CB80280315BFD088006DCB52 /* NSObject+JSON.m in Sources */,
 				CBE34D8D15D53958007596CB /* AFOAuth2Client.m in Sources */,
-				CBE34D9615D540C1007596CB /* VITwitterOAuthController.m in Sources */,
+				CBE34D9615D540C1007596CB /* VIFoursquareOAuthController.m in Sources */,
 				CBE34D9915D540D1007596CB /* VIBasicTwitterViewController.m in Sources */,
 				CBE34D9E15D54124007596CB /* UIImage+Extras.m in Sources */,
 				CBE34D9F15D54124007596CB /* VIBubbleCell.m in Sources */,

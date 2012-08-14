@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
+#import "AFOAuth2Client.h"
 
 #define REPOSE_RESPONSE_OK(c) (c == ReposeResponseCodeOK || c == ReposeResponseCodeCreated || c == ReposeResponseCodeAccepted)
 #define REPOSE_RESPONSE_NOT_OK(c) !ReposeResponseOK(c)
@@ -37,7 +38,11 @@ typedef enum {
     ReposeResponseCodeRequestFailed = 0
 } ReposeResponseCode;
 
+#ifdef AFOAuth2ClientImported
+@interface Repose : AFOAuth2Client
+#else
 @interface Repose : AFHTTPClient
+#endif
 
 - (void)sendRequestWithMethod:(NSString*)method 
                          path:(NSString *)path 
