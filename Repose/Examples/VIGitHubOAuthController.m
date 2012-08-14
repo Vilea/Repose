@@ -1,19 +1,19 @@
 //
-//  VIFoursquareOAuthController.m
+//  VIGitHubOAuthController.m
 //  Repose
 //
-//  Created by Junior Bontognali on 8/10/12.
+//  Created by Junior Bontognali on 8/14/12.
 //
 //
 
-#import "VIFoursquareOAuthController.h"
+#import "VIGitHubOAuthController.h"
 #import "Repose.h"
 
-#define kConsumerKey @"HJMXNADCHBMHZ1BEYDHMOPLDVBB0VDW2Y1OAKIQYT1400FET"
-#define kConsumerSecret @"TG2KJHNRLXNOV5LDLDD0TOZBNZEYEO5T5S5UM4PRIDPGOS5M"
+#define kConsumerKey @"87b12da56ab1692695dc"
+#define kConsumerSecret @"eeaca81b5a9549a7637f419b393c4b533e1ab2b1"
 #define kCallbackURL @"http://bonto.ch/callback"
 
-@interface VIFoursquareOAuthController () {
+@interface VIGitHubOAuthController () {
     NSMutableArray *_objects;
 }
 
@@ -22,10 +22,11 @@
 
 @property (strong, nonatomic) UIActivityIndicatorView *ai;
 
+- (void)_loadRepos;
+
 @end
 
-
-@implementation VIFoursquareOAuthController
+@implementation VIGitHubOAuthController
 
 @synthesize client = _client;
 
@@ -34,7 +35,7 @@
     self = [super init];
     if (self) {
         self.title = NSStringFromClass([self class]);
-        self.client = [[Repose alloc] initWithBaseURL:[NSURL URLWithString:@"https://foursquare.com"]];
+        self.client = [[Repose alloc] initWithBaseURL:[NSURL URLWithString:@"https://github.com"]];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     return self;
@@ -62,28 +63,20 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated
-{    
+{
     [super viewDidAppear:animated];
     
     self.ai.center = self.view.center;
     
     if (!self.token) {
-        [self.client authenticateUsingOAuthWithPath:@"/oauth2/authenticate"
-                                         parameters:@{ @"client_id" : kConsumerKey, @"response_type" : @"token", @"redirect_uri" : kCallbackURL}
+        [self.client authenticateUsingOAuthWithPath:@"/login/oauth/authorize"
+                                         parameters:@{ @"client_id" : kConsumerKey, @"redirect_uri" : kCallbackURL}
                                            callback:kCallbackURL
                                       withWebViewIn:self
                                            delegate:(id<AFOAuth2ClientDelegate>)self];
     } else {
-        self.client = [[Repose alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.foursquare.com/v2"]];
-        [self.client get:@"/v2/users/self/checkins"
-              parameters:@{@"oauth_token":self.token}
-               withBlock:^(ReposeResponseCode code, id responseObject)
-        {
-            NSLog(@"responseObject -> %@", responseObject);
-            _objects = [[[responseObject objectForKey:@"response"] objectForKey:@"checkins"] objectForKey:@"items"];
-            [self.ai stopAnimating];
-            [self.tableView reloadData];
-        }];
+        if (![self.token isEqualToString:@""])
+            [self _loadRepos];
     }
     
     [self.ai startAnimating];
@@ -116,13 +109,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    static NSDateFormatter *df = nil;
-    
-    if (!df) {
-        df = [[NSDateFormatter alloc] init];
-        [df setTimeStyle:NSDateFormatterMediumStyle];
-        [df setDateStyle:NSDateFormatterLongStyle];
-    }
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -130,10 +116,9 @@
     }
     
     NSDictionary *item = [_objects objectAtIndex:indexPath.row];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[item objectForKey:@"createdAt"] intValue]];
     
-    cell.textLabel.text = [[item objectForKey:@"venue"] objectForKey:@"name"];
-    cell.detailTextLabel.text = [df stringFromDate:date];
+    cell.textLabel.text = [item objectForKey:@"name"];
+    cell.detailTextLabel.text = [item objectForKey:@"description"];
     
     return cell;
 }
@@ -143,15 +128,40 @@
     
 }
 
+#pragma mark - Actions
+
+- (void)_loadRepos
+{
+    self.client = [[Repose alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.github.com"]];
+    [self.client get:@"/user/repos"
+          parameters:@{@"access_token":self.token}
+           withBlock:^(ReposeResponseCode code, id responseObject)
+     {
+         NSLog(@"responseObject -> %@", responseObject);
+         _objects = responseObject;
+         [self.ai stopAnimating];
+         [self.tableView reloadData];
+     }];
+}
+
 #pragma mark - AFOAuth2ClientDelegate
 
 - (void)client:(AFOAuth2Client *)client receivedToken:(NSString *)token
 {
-    self.token = token;
-    [[NSUserDefaults standardUserDefaults] setObject:token forKey:NSStringFromClass([self class])];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    self.token = @"";
     
-    [self.ai stopAnimating];
+    [self.client post:@"/login/oauth/access_token"
+           parameters:@{@"client_id":kConsumerKey, @"client_secret":kConsumerSecret, @"code":token, @"state":@""}
+            withBlock:^(ReposeResponseCode code, id responseObject)
+     {
+         NSLog(@"object -> %@", responseObject);
+         
+         [[NSUserDefaults standardUserDefaults] setObject:[responseObject objectForKey:@"access_token"] forKey:NSStringFromClass([self class])];
+         [[NSUserDefaults standardUserDefaults] synchronize];
+         
+         [self _loadRepos];
+     }];
+    
 }
 
 

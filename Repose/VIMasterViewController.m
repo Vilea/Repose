@@ -9,6 +9,7 @@
 #import "VIMasterViewController.h"
 #import "VIBasicTwitterViewController.h"
 #import "VIFoursquareOAuthController.h"
+#import "VIGitHubOAuthController.h"
 
 @interface VIMasterViewController () {
     NSArray *_objects;
@@ -24,7 +25,7 @@
     self = [super init];
     if (self) {
         self.title = NSLocalizedString(@"Master", @"Master");
-        _objects = @[@"VIBasicTwitterViewController", @"VIFoursquareOAuthController"];
+        _objects = @[@"VIBasicTwitterViewController", @"VIFoursquareOAuthController", @"VIGitHubOAuthController"];
     }
     return self;
 }- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

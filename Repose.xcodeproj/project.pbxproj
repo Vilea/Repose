@@ -32,6 +32,7 @@
 		CBD9414E15DA74BE001B135D /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD9414415DA74BE001B135D /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CBD9415015DA78A3001B135D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD9414F15DA78A3001B135D /* Icon.png */; };
 		CBD9415215DA78A5001B135D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD9415115DA78A5001B135D /* Icon@2x.png */; };
+		CBD9415515DA7984001B135D /* VIGitHubOAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD9415415DA7984001B135D /* VIGitHubOAuthController.m */; };
 		CBE34D9615D540C1007596CB /* VIFoursquareOAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE34D9515D540C1007596CB /* VIFoursquareOAuthController.m */; };
 		CBE34D9915D540D1007596CB /* VIBasicTwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE34D9815D540D1007596CB /* VIBasicTwitterViewController.m */; };
 		CBE34D9E15D54124007596CB /* UIImage+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE34D9B15D54124007596CB /* UIImage+Extras.m */; };
@@ -84,6 +85,8 @@
 		CBD9414415DA74BE001B135D /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		CBD9414F15DA78A3001B135D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		CBD9415115DA78A5001B135D /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		CBD9415315DA7984001B135D /* VIGitHubOAuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIGitHubOAuthController.h; path = Examples/VIGitHubOAuthController.h; sourceTree = "<group>"; };
+		CBD9415415DA7984001B135D /* VIGitHubOAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIGitHubOAuthController.m; path = Examples/VIGitHubOAuthController.m; sourceTree = "<group>"; };
 		CBE34D9415D540C1007596CB /* VIFoursquareOAuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIFoursquareOAuthController.h; path = Examples/VIFoursquareOAuthController.h; sourceTree = "<group>"; };
 		CBE34D9515D540C1007596CB /* VIFoursquareOAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIFoursquareOAuthController.m; path = Examples/VIFoursquareOAuthController.m; sourceTree = "<group>"; };
 		CBE34D9715D540D1007596CB /* VIBasicTwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIBasicTwitterViewController.h; path = Examples/VIBasicTwitterViewController.h; sourceTree = "<group>"; };
@@ -272,6 +275,8 @@
 				CBE34D9515D540C1007596CB /* VIFoursquareOAuthController.m */,
 				CBE34D9715D540D1007596CB /* VIBasicTwitterViewController.h */,
 				CBE34D9815D540D1007596CB /* VIBasicTwitterViewController.m */,
+				CBD9415315DA7984001B135D /* VIGitHubOAuthController.h */,
+				CBD9415415DA7984001B135D /* VIGitHubOAuthController.m */,
 			);
 			name = Examples;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 				CBD9414C15DA74BE001B135D /* AFURLConnectionOperation.m in Sources */,
 				CBD9414D15DA74BE001B135D /* AFXMLRequestOperation.m in Sources */,
 				CBD9414E15DA74BE001B135D /* UIImageView+AFNetworking.m in Sources */,
+				CBD9415515DA7984001B135D /* VIGitHubOAuthController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
