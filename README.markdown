@@ -1,7 +1,7 @@
 # REPOSE
 ## Abstract
 A light extension of [AFNetworking](https://github.com/AFNetworking/AFNetworking) for REST.
-The aim of this library is to provide a smart and light extesion of AFNetworking to create apps using REST server sides.
+The aim of this library is to provide a smart and light extesion of AFNetworking to create apps using full REST server sides.
 
 ## Development
 Repose is still in early development stage.
@@ -12,7 +12,7 @@ Repose is still in early development stage.
 - Basic authentication
 - Support of XML and JSON calls/responses
 - Smart object conversion
-- Advanced authentications using OAuth 2.0
+- Advanced authentications using OAuth 2.0 ✓ (using a fork of [AFOAuth2Client](https://github.com/bontoJR/AFOAuth2Client))
 - Core Data integration and optimization
 - [TouchDB](https://github.com/couchbaselabs/TouchDB-iOS) integration
 
@@ -42,6 +42,37 @@ Handle the response with a block.
     }];
 
 The previous call get the latest tweets for the user VileaGmbH.
+
+### OAuth 2.0
+OAuth 2.0 could be a pain in the 4$$ if not well implemented and sometimes it's needed to access third party services.<br/>
+We implemented a first version of OAuth 2.0 authentication and authorization. Due to the complexity and the big differences of each implementation, we made 2 examples with GitHub (retrieving Repos) and Foursquare (retrieving checkins).
+
+The system basically works with this method (from Foursquare example):
+
+		[self.client authenticateUsingOAuthWithPath:@"/oauth2/authenticate"
+	                                         parameters:@{ @"client_id" : kConsumerKey, @"response_type" : @"token", @"redirect_uri" : kCallbackURL}
+	                                           callback:kCallbackURL
+	                                      withWebViewIn:self
+	                                           delegate:(id<AFOAuth2ClientDelegate>)self];
+
+Once the user has authenticated and authorized, the system returns the token to use, using the delegate:
+
+		@protocol AFOAuth2ClientDelegate <NSObject>
+		- (void)client:(AFOAuth2Client *)client receivedToken:(NSString *)token;
+		- (void)client:(AFOAuth2Client *)client failedToReceiveToken:(NSError *)error;
+		@end
+
+That could be saved and handled in this way:
+
+		- (void)client:(AFOAuth2Client *)client receivedToken:(NSString *)token
+		{
+		    self.token = token;
+		    [[NSUserDefaults standardUserDefaults] setObject:token forKey:NSStringFromClass([self class])];
+		    [[NSUserDefaults standardUserDefaults] synchronize];
+		    
+		    [self.ai stopAnimating];
+		}
+*Note: this is and example, the best ways is saving the token in the keychain, an example is coming soon.*
 
 ### ReposeResponseCode
 In Repose, to help readability and coding, we mapped the most commons http status codes in this way:
